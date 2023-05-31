@@ -16,7 +16,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.mifonelibproj.core.Factory
-import com.exanple.implementkotlin.TransferFragment
 import java.util.Timer
 import java.util.TimerTask
 
