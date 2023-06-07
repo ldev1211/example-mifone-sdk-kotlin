@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.example.mifonelibproj.core.Factory
+import com.example.mifonelibproj.core.FactoryMifone
 import com.example.mifonelibproj.listener.MifoneCoreListener
 import com.example.mifonelibproj.model.other.RegistrationState
 import com.example.mifonelibproj.model.other.State
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             fragmentTransaction.add(R.id.frame_fragment, CallFragment(editText?.getText().toString(), CallFragment.TYPE_CALL_OUT), TAG_FRAGMENT_CALL)
             fragmentTransaction.commit()
         })
-        Factory.registerListener(object : MifoneCoreListener {
+        FactoryMifone.registerListener(object : MifoneCoreListener {
             override fun onResultConfigAccount(isSuccess: Boolean, message: String) {
                 Log.d(TAG, "onResultConfigAccount: $isSuccess, message: $message")
             }

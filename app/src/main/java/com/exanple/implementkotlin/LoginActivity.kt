@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mifonelibproj.core.Factory
+import com.example.mifonelibproj.core.FactoryMifone
 import com.example.mifonelibproj.listener.MifoneCoreListener
 import com.example.mifonelibproj.model.other.ConfigMifoneCore
 import com.example.mifonelibproj.model.other.RegistrationState
@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         textInputLayoutUsername = findViewById(R.id.edt_username)
         btnLogin = findViewById(R.id.btn_login)
         viewDialog = layoutInflater.inflate(R.layout.layout_dialog_prog, null)
-        Factory.registerListener(object : MifoneCoreListener {
+        FactoryMifone.registerListener(object : MifoneCoreListener {
             override fun onResultConfigAccount(isSuccess: Boolean, message: String) {
                 if (isSuccess) {
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
@@ -56,8 +56,8 @@ class LoginActivity : AppCompatActivity() {
             }
             dialog!!.show()
             user = User(textInputLayoutUsername?.getText().toString().trim { it <= ' ' }, textInputLayoutPassword?.getText().toString().trim { it <= ' ' }, "sf")
-            Factory.createMifoneCore(this@LoginActivity, ConfigMifoneCore(5, "", ""), user)
-            Factory.configCore()
+            FactoryMifone.createMifoneCore(applicationContext, ConfigMifoneCore(5, "", ""), user)
+            FactoryMifone.configCore()
         })
     }
 }

@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.mifonelibproj.core.Factory
+import com.example.mifonelibproj.core.FactoryMifone
 
 class TransferFragment internal constructor() : Fragment(), View.OnClickListener {
     var viewTransferFragment: View? = null
@@ -43,7 +43,7 @@ class TransferFragment internal constructor() : Fragment(), View.OnClickListener
         t0 = viewTransferFragment?.findViewById(R.id.num_0_trans)
         ts = viewTransferFragment?.findViewById(R.id.star_trans)
         tsh = viewTransferFragment?.findViewById(R.id.sharp_trans)
-        btnTransfer?.setOnClickListener(View.OnClickListener { v: View? -> Factory.transfer(editText?.getText().toString()) })
+        btnTransfer?.setOnClickListener(View.OnClickListener { v: View? -> FactoryMifone.transfer(editText?.getText().toString()) })
         t1?.setOnClickListener(this)
         t2?.setOnClickListener(this)
         t3?.setOnClickListener(this)

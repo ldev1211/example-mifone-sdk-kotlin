@@ -15,7 +15,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.mifonelibproj.core.Factory
+import com.example.mifonelibproj.core.FactoryMifone
 import java.util.Timer
 import java.util.TimerTask
 
@@ -32,7 +32,7 @@ class CallFragment    // Required empty public constructor
     var optTransfer: ImageView? = null
     var optToggleSpeaker: ImageView? = null
     var optToggleMic: ImageView? = null
-    var optToggle: TextView? = null
+    var optToggle: ImageView? = null
     private fun convertTimeToString(countTime: Int): String {
         val second = countTime % 60
         val minute = countTime / 60
@@ -74,9 +74,8 @@ class CallFragment    // Required empty public constructor
         optTransfer = viewFragmentCall?.findViewById(R.id.opt_transfer)
         optToggle?.setOnClickListener(View.OnClickListener { v: View? ->
             isPaused = !isPaused
-            optToggle?.setBackground(if (isPaused) holdSelected else hold)
-            optToggle?.setTextColor(Color.parseColor(if (isPaused) "#FF000000" else "#FFFFFFFF"))
-            if (isPaused) Factory.holdCall() else Factory.resumCall()
+            optToggle?.setImageDrawable(if (isPaused) resume else pause)
+            if (isPaused) FactoryMifone.holdCall() else FactoryMifone.resumeCall()
         })
         optToggleMic?.setOnClickListener(View.OnClickListener { v: View? ->
             isMuteMic = !isMuteMic
@@ -100,7 +99,7 @@ class CallFragment    // Required empty public constructor
         })
         Log.d(MainActivity.TAG, "onCreateView: $mType")
         if (mNumberPhone == null) {
-            tvNumbPhone?.setText(Factory.getNumbPhoneCallIn())
+            tvNumbPhone?.setText(FactoryMifone.getNumbPhoneCallIn())
         }
         if (mType == TYPE_CONNECTED) {
             grOpt?.setVisibility(View.VISIBLE)
@@ -111,12 +110,12 @@ class CallFragment    // Required empty public constructor
             }, 0, 1000)
             btnAccept?.setVisibility(View.GONE)
         } else if (mType == TYPE_CALL_OUT) {
-            Factory.makeCall(mNumberPhone)
+            FactoryMifone.makeCall(mNumberPhone)
             tvNumbPhone?.setText(mNumberPhone)
             btnAccept?.setVisibility(View.GONE)
         }
         btnAccept?.setOnClickListener(View.OnClickListener { v: View? ->
-            Factory.acceptCall()
+            FactoryMifone.acceptCall()
             btnAccept?.setVisibility(View.GONE)
             timer!!.schedule(object : TimerTask() {
                 override fun run() {
@@ -124,7 +123,7 @@ class CallFragment    // Required empty public constructor
                 }
             }, 0, 1000)
         })
-        btnEnd?.setOnClickListener(View.OnClickListener { v: View? -> Factory.cancelCall() })
+        btnEnd?.setOnClickListener(View.OnClickListener { v: View? -> FactoryMifone.cancelCall() })
         return viewFragmentCall
     }
 
